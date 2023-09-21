@@ -2,7 +2,8 @@ import React, { lazy, Suspense, useLayoutEffect, useState } from 'react';
 import { Spinner } from 'reactstrap';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, generatePath, useParams } from "react-router-dom";
+import data from './fakedb/courseData';
 import "aos/dist/aos.js"
 import "aos/dist/aos.css"
 import AOS from "aos"
@@ -33,10 +34,15 @@ const Dashboard = lazy(() => import("./components/Dashboard/Layout"))
 
 
 function App() {
-  
+ 
+
   const token = useSelector((state) => state?.user?.token)
 
   const [blogData, setBlogData] = useState([])
+
+  // const {id} = useParams()
+  // const path = generatePath('/course/:id', {id:data.dpt1})
+
 
   
 
@@ -89,7 +95,7 @@ function App() {
           <Route path="/about" element={ <About blogdata={blogData}/> }/>
           <Route path="/blog" element={ <Blog blogdata={blogData}/> }/>
           <Route path="/blog/:id" element={<Blogdetails data={blogData}/>}/>
-          <Route path="/course/:id" element={<Course/>}/>
+          <Route path="/:id" element={<Course/>}/>
           <Route path="/dashboard/:text/?" element={<Dashboard/>}/>
         </Routes>
 

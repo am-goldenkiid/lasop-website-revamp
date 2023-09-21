@@ -3,7 +3,7 @@ import "./coursehero.css"
 import { FaMapMarker, FaCheckSquare, FaCalendar, FaArrowRight } from "react-icons/fa"
 import { BiCalendar } from "react-icons/bi"
 import line from "./../../assets/Line.png"
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, generatePath, useNavigate, useParams } from 'react-router-dom'
 import { NavLink } from 'reactstrap'
 import outline from "./../../assets/outline.png"
 import data from './../../fakedb/courseData'
@@ -20,7 +20,9 @@ import Video from '../common/Video'
 function CourseCard() {
 
   const navigate = useNavigate()
-  const { id } = useParams()
+  const { id } = useParams({})
+
+ 
 
   const [pageData, setPageData] = useState({})
   const [currentCurric, setCurrentCurric] = useState(0)
@@ -28,7 +30,7 @@ function CourseCard() {
 
   useEffect(() =>{
     
-    var info = data[id]
+    var info = data.find(d => d.output === id)
     
     if(info === undefined){
       navigate("/")
